@@ -4,7 +4,6 @@
   <img src="./xwm_logo.png" alt="XWM Logo" style="width: 200px; height: 200px;"/>
 </p>
 
-## Overview
 XWM, short for *"Waiting for xarch"* (Japanese: *"xarchを待っている"*), is a C++17-based architecture image loader.  
 It can execute any virtualized architecture that implements a `run` function, while providing seamless integration between the host OS and the loaded architecture.  
 Supported platforms currently include Linux and Windows, with Android support coming soon.
