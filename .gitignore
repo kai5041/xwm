@@ -1,0 +1,33 @@
+# Android / Gradle
+/android/.gradle/
+/android/app/build/
+/android/build/
+/android/local.properties
+/android/**/*.iml
+/android/.idea/
+/android/gradle/wrapper/gradle-wrapper.jar
+
+# Android NDK / CMake intermediate files
+/android/app/.cxx/
+/android/app/build/**/*.so
+/android/app/build/**/*.a
+/android/app/build/**/*.o
+
+# C++ build
+/build/
+/build/**/*.o
+/build/**/*.obj
+/build/**/*.exe
+/build/**/*.out
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor swap / backup files
+*~
+*.swp
