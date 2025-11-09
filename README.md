@@ -34,12 +34,12 @@ $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/kai5041/xwm/refs/heads
 ```
 ## Contributing
 
-You can support or contribute to XWM or other projects by donating to the BSC address below or contacting me via [harmonyren.net](https://harmonyren.net/contact-us) (listed as "Kai/解").  
-Contributions also help advance the **Open Innovation Collective HARMONY連**.  
-More details are available on [HARMONY連's official site](https://harmonyren.net/about-us).  
+Support or contribute to XWM and related projects by:
+- Donating to the following BSC address: `0x850a059814C88a51B6239F4a5be5cF46c98EB3fa`  
+- Contacting me via [harmonyren.net](https://harmonyren.net/contact-us) (listed as "Kai/解")  
 
-BSC address: `0x850a059814C88a51B6239F4a5be5cF46c98EB3fa`
-
+Contributions help advance the **Open Innovation Collective HARMONY連**.  
+More information is available on [HARMONY連's official site](https://harmonyren.net/about-us).
 
 ## License
 
