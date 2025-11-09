@@ -1,7 +1,7 @@
 # XWM | Waiting for xarch
 
 <p align="center">
-  <img src="./xwm_logo.png" alt="XWM Logo" style="width: 200; height: 200;"/>
+  <img src="./xwm_logo.png" alt="XWM Logo" style="width: 200px; height: 200px;"/>
 </p>
 
 ## Overview
