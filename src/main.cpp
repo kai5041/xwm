@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv) {
   if (argc == 1) {
-    xwm::log_message(xwm::LogLevel::ERROR,
+    xwm::log_message(xwm::LogLevel::_ERROR,
                      "No command provided. Please specify one.");
     return 1;
   }

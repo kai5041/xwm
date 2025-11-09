@@ -3,56 +3,40 @@ SRC_DIR := src
 INCLUDE_DIR := include
 BUILD_DIR := build
 
-SRC := $(shell find $(SRC_DIR) -type f -name '*.cpp')
-INCLUDE := $(shell find $(INCLUDE_DIR) -type f -name '*.hpp')
-
 CXX ?= g++
-ARCH ?= native
-CXX_FLAGS := -std=c++20 -Wall -O3 -march=$(ARCH) -flto -funroll-loops -ffast-math -fomit-frame-pointer -I$(INCLUDE_DIR)
-LD_FLAGS := -lpthread
+CXX_FLAGS ?= -std=c++17 -Wall -Wextra -Wpedantic -MMD -MP
+LD_FLAGS ?=
 
-LINUX_BUILD_DIR := $(BUILD_DIR)/linux
-WIN_BUILD_DIR   := $(BUILD_DIR)/win
+PLATFORM_NAME ?= $(shell uname -s | tr '[:upper:]' '[:lower:]')
 
-LINUX_OBJ := $(patsubst $(SRC_DIR)/%.cpp,$(LINUX_BUILD_DIR)/%.o,$(SRC))
-WIN_OBJ   := $(patsubst $(SRC_DIR)/%.cpp,$(WIN_BUILD_DIR)/%.o,$(SRC))
+ifeq ($(PLATFORM_NAME),Linux)
+    include toolchains/linux.mk
+endif
 
-# Linux build
-# ----------------------------------------
-$(LINUX_BUILD_DIR)/$(PROJECT_NAME): $(LINUX_OBJ) | $(LINUX_BUILD_DIR) $(INCLUDE)
-	$(CXX) -o $@ $^ $(LD_FLAGS)
+ifeq ($(PLATFORM_NAME),Darwin)
+    include toolchains/macos.mk
+endif
 
-$(LINUX_BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(INCLUDE) $(LINUX_BUILD_DIR)
-	@ mkdir -p $(dir $@)
-	$(CXX) $(CXX_FLAGS) -c $< -o $@
+ifeq ($(PLATFORM_NAME),Windows)
+    include toolchains/windows.mk
+endif
 
-$(LINUX_BUILD_DIR):
-	mkdir -p $@
+SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJECTS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/$(PLATFORM_NAME)/%.o,$(SOURCES))
+-include $(OBJECTS:.o=.d)
 
-linux: $(LINUX_BUILD_DIR)/$(PROJECT_NAME)
-	@echo "Linux build complete: $<"
+all: $(BUILD_DIR)/$(PLATFORM_NAME)/$(PROJECT_NAME)
 
-# Windows build
-# ----------------------------------------
-$(WIN_BUILD_DIR)/$(PROJECT_NAME).exe: $(WIN_OBJ) | $(WIN_BUILD_DIR) $(INCLUDE)
-	x86_64-w64-mingw32-g++ -o $@ $^ -static -static-libgcc -static-libstdc++ -lpthread
+$(BUILD_DIR)/$(PLATFORM_NAME)/$(PROJECT_NAME): $(OBJECTS)
+	@mkdir -p $(BUILD_DIR)/$(PLATFORM_NAME)
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -o $@ $^ $(LD_FLAGS)
 
-$(WIN_BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(INCLUDE) $(WIN_BUILD_DIR)
-	@ mkdir -p $(dir $@)
-	x86_64-w64-mingw32-g++ $(CXX_FLAGS) -c $< -o $@
+$(BUILD_DIR)/$(PLATFORM_NAME)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)/$(PLATFORM_NAME)
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
-$(WIN_BUILD_DIR):
-	mkdir -p $@
-
-win: $(WIN_BUILD_DIR)/$(PROJECT_NAME).exe
-	@echo "Windows build complete: $<"
-
-# Phony
-# ----------------------------------------
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)/$(PLATFORM_NAME)
 
-install_linux:
-	cp $(LINUX_BUILD_DIR)/$(PROJECT_NAME) /usr/local/bin/$(PROJECT_NAME)
-
-.PHONY: linux win clean install_linux
+run: all
+	./$(BUILD_DIR)/$(PLATFORM_NAME)/$(PROJECT_NAME)

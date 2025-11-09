@@ -25,7 +25,7 @@ void Cli::register_command(Command cmd) { commands.push_back(std::move(cmd)); }
 
 int Cli::run(const Vec<std::string> &args) {
   if (args.empty()) {
-    log_message(LogLevel::ERROR, "No command provided.");
+    log_message(LogLevel::_ERROR, "No command provided.");
     return 1;
   }
 
@@ -37,7 +37,7 @@ int Cli::run(const Vec<std::string> &args) {
       [&cmd_name](const Command &c) { return c.args == cmd_name; });
 
   if (it == commands.end()) {
-    log_message(LogLevel::ERROR, "Unknown command '", cmd_name, "'");
+    log_message(LogLevel::_ERROR, "Unknown command '", cmd_name, "'");
     return 1;
   }
 

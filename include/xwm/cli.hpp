@@ -5,6 +5,13 @@
 #include <string>
 #include <string_view>
 
+#ifdef _WIN32
+    #define XWM_EXPORT extern "C" __declspec(dllexport)
+#else
+    #define XWM_EXPORT extern "C" __attribute__((visibility("default")))
+#endif
+
+
 namespace xwm {
 
 class Cli;

@@ -14,12 +14,7 @@ public:
 
   virtual ~Architecture() noexcept = default;
 
-  Architecture(const Architecture &) = delete;
-  Architecture &operator=(const Architecture &) = delete;
-  Architecture(Architecture &&) noexcept = default;
-  Architecture &operator=(Architecture &&) noexcept = default;
-
-  virtual void run() noexcept = 0;
+  virtual int run() noexcept = 0;
 };
 
 } // namespace xwm

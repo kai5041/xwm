@@ -1,10 +1,15 @@
 #!/bin/bash
-set -e
-# Build APK
-./gradlew assembleDebug
+set -euo pipefail
 
-# Install APK
-adb install -r app/build/outputs/apk/debug/app-debug.apk
+./gradlew assembleDebug \
+  --daemon \
+  --parallel \
+  --configure-on-demand \
+  --build-cache \
+  -x lint \
+  -x test
 
-# Launch app
-adb shell monkey -p com.example.xwm -c android.intent.category.LAUNCHER 1
+APK=app/build/outputs/apk/debug/app-debug.apk
+adb install-multiple -r -t "$APK"
+
+adb shell am start -S com.example.xwm/.MainActivity

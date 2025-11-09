@@ -6,6 +6,7 @@
 /android/**/*.iml
 /android/.idea/
 /android/gradle/wrapper/gradle-wrapper.jar
+/android/.kotlin/
 
 # Android NDK / CMake intermediate files
 /android/app/.cxx/
@@ -31,3 +32,6 @@ Thumbs.db
 # Editor swap / backup files
 *~
 *.swp
+
+*.so
+*.dll

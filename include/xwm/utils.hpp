@@ -22,7 +22,7 @@ enum class LogLevel : u8 {
   DEBUG,
   INFO,
   WARN,
-  ERROR,
+  _ERROR,
   FATAL,
 };
 
@@ -34,7 +34,7 @@ inline const char *log_level_to_color(LogLevel level) {
     return colors::GREEN;
   case LogLevel::WARN:
     return colors::YELLOW;
-  case LogLevel::ERROR:
+  case LogLevel::_ERROR:
     return colors::RED;
   case LogLevel::FATAL:
     return colors::MAGENTA;
@@ -51,7 +51,7 @@ inline const char *log_level_to_string(LogLevel level) {
     return "INFO";
   case LogLevel::WARN:
     return "WARN";
-  case LogLevel::ERROR:
+  case LogLevel::_ERROR:
     return "ERROR";
   case LogLevel::FATAL:
     return "FATAL";

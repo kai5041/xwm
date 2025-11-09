@@ -18,8 +18,8 @@ using i16 = std::int16_t;
 using i32 = std::int32_t;
 using i64 = std::int64_t;
 
-using f32 = float;
-using f64 = double;
+using r32 = float;
+using r64 = double;
 
 template <typename T, typename U> using Map = std::unordered_map<T, U>;
 template <typename T> using Vec = std::vector<T>;
