@@ -1,43 +1,43 @@
 #pragma once
 
-#include <xwm/defs.hpp>
 #include <functional>
 #include <string>
 #include <string_view>
 
-#ifdef _WIN32
-    #define XWM_EXPORT extern "C" __declspec(dllexport)
-#else
-    #define XWM_EXPORT extern "C" __attribute__((visibility("default")))
-#endif
+#include <xwm/defs.hpp>
 
+#ifdef _WIN32
+#define XWM_EXPORT extern "C" __declspec(dllexport)
+#else
+#define XWM_EXPORT extern "C" __attribute__((visibility("default")))
+#endif
 
 namespace xwm {
 
 class Cli;
 
 struct Command {
-    std::string args;
-    std::string description;
-    std::function<int(Cli &)> handler;
+  std::string args;
+  std::string description;
+  std::function<int(Cli &)> handler;
 
-    Command(std::string_view a, std::string_view desc,
-            std::function<int(Cli &)> h);
+  Command(std::string_view a, std::string_view desc,
+          std::function<int(Cli &)> h);
 };
 
 class Cli {
 private:
-    Vec<Command> commands;
-    Vec<std::string> args;
+  Vec<Command> commands;
+  Vec<std::string> args;
 
 public:
-    Cli();
+  Cli();
 
-    void register_command(Command cmd);
-    int run(const Vec<std::string> &args);
-    void print_help() const;
+  void register_command(Command cmd);
+  int run(const Vec<std::string> &args);
+  void print_help() const;
 
-    Vec<std::string> &get_args() { return args; }
+  Vec<std::string> &get_args() { return args; }
 };
 
 } // namespace xwm

@@ -1,6 +1,7 @@
-#include "xwm/commands.hpp"
 #include <xwm/cli.hpp>
+#include <xwm/commands.hpp>
 #include <xwm/utils.hpp>
+#include <xwm/version.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -19,6 +20,12 @@ Cli::Cli() {
 
   register_command({"load", "Load architecture image with optional arguments",
                     [this](Cli &cli) { return load_architecture(cli); }});
+
+  register_command({"version", "Prints xwm version", [this](Cli &) {
+                      std::cout << "xwm version " << xwm::get_version()
+                                << std::endl;
+                      return 0;
+                    }});
 }
 
 void Cli::register_command(Command cmd) { commands.push_back(std::move(cmd)); }

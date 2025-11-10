@@ -43,4 +43,4 @@ More information is available on [HARMONY連's official site](https://harmonyren
 
 ## License
 
-License on the way.
+This project is licensed under the [MIT License](./LICENSE).
