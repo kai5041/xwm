@@ -60,32 +60,5 @@ inline const char *log_level_to_string(LogLevel level) {
   }
 }
 
-template <typename... Args>
-inline void log_message(LogLevel level, Args &&...args) {
-  std::stringstream ss;
-  ss << "[" << log_level_to_color(level) << log_level_to_string(level)
-     << colors::RESET << "]"
-     << " ";
-  (ss << ... << std::forward<Args>(args));
-  ss << std::endl;
-  std::cout << ss.str();
-}
-
-inline void set_log_level(LogLevel level) {
-  static LogLevel &current_level = *new LogLevel(level);
-  current_level = level;
-}
-
-inline bool should_log(LogLevel level) {
-  static LogLevel &current_level = *new LogLevel(LogLevel::DEBUG);
-  return static_cast<u8>(level) >= static_cast<u8>(current_level);
-}
-
-template <typename... Args>
-inline void log_if(LogLevel level, bool condition, Args &&...args) {
-  if (condition && should_log(level)) {
-    log_message(level, std::forward<Args>(args)...);
-  }
-}
 
 } // namespace xwm

@@ -9,19 +9,9 @@ LD_FLAGS ?=
 
 RELEASE_FLAGS ?= -O3 -DNDEBUG -static-libstdc++ -static-libgcc
 
-PLATFORM_NAME ?= $(shell uname -s | tr '[:upper:]' '[:lower:]')
+PLATFORM_NAME ?= linux-x32_64
 
-ifeq ($(PLATFORM_NAME),Linux)
-    include toolchains/linux.mk
-endif
-
-ifeq ($(PLATFORM_NAME),Darwin)
-    include toolchains/macos.mk
-endif
-
-ifeq ($(PLATFORM_NAME),Windows)
-    include toolchains/windows.mk
-endif
+include toolchains/$(PLATFORM_NAME).mk
 
 SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJECTS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/$(PLATFORM_NAME)/%.o,$(SOURCES))
@@ -44,7 +34,7 @@ $(BUILD_DIR)/$(PLATFORM_NAME)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 clean:
-	rm -rf $(BUILD_DIR)/$(PLATFORM_NAME)
+	rm -rf $(BUILD_DIR)
 
 run: all
 	./$(BUILD_DIR)/$(PLATFORM_NAME)/$(PROJECT_NAME)

@@ -1,12 +1,8 @@
-#include <xwm/cli.hpp>
-#include <xwm/utils.hpp>
+#include <iostream>
 
-int main(int argc, char **argv) {
-  if (argc == 1) {
-    xwm::log_message(xwm::LogLevel::_ERROR,
-                     "No command provided. Please specify one.");
-    return 1;
-  }
+int main() {
+  //
 
-  return xwm::Cli().run((xwm::Vec<std::string>(argv + 1, argv + argc)));
+  
+  return 0;
 }
