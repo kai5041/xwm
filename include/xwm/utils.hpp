@@ -1,8 +1,8 @@
 #pragma once
 
+#include <cstdlib>
 #include <iostream>
-#include <sstream>
-
+#include <string>
 #include <xwm/defs.hpp>
 
 namespace xwm {
@@ -60,5 +60,12 @@ inline const char *log_level_to_string(LogLevel level) {
   }
 }
 
+inline void log_if_error(int err, std::string msg) {
+  if (err) {
+    std::cerr << "[" << colors::RED << "ERROR" << "] " << colors::RESET << msg
+              << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+}
 
 } // namespace xwm

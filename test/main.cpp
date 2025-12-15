@@ -1,19 +1,23 @@
+#include <cstdlib>
 #include <iostream>
+#include <xwm/Dispatcher.hpp>
 
-#include <xwm/cli.hpp>
-#include <xwm/architecture.hpp>
+#include <xwm/Architecture.hpp>
+
+using namespace xwm;
 
 class MyArchitecture : public xwm::Architecture {
 public:
-  MyArchitecture(xwm::Vec<std::string> args) : Architecture(std::move(args)) {}
-  ~MyArchitecture() override = default;
-
-  int run() noexcept override {
-    std::cout << "Hello World!" << std::endl;
+  MyArchitecture(Dispatcher &dispatcher) : Architecture(dispatcher) {}
+  u32 run() override {
+    std::cout << "Welcome to my architecture\n";
+    for (int i = 0; i < dispatcher->get_args().size(); i++) {
+      std::cout << "Argument " << i << ": " << dispatcher->get_args()[i]
+                << std::endl;
+    }
+    exit(EXIT_FAILURE);
     return 0;
   }
 };
 
-XWM_EXPORT xwm::Architecture *load_architecture(xwm::Vec<std::string> args) {
-  return new MyArchitecture(std::move(args));
-}
+XWM_ENTRY(MyArchitecture)
