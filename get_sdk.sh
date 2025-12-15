@@ -7,7 +7,7 @@ TARGET_DIR="include/xwm"
 mkdir -p "$TARGET_DIR"
 echo "Downloading XWM headers into $TARGET_DIR"
 
-HEADERS=("Architecture.hpp" "Dispatcher.hpp" "defs.hpp", "utils.hpp" "core.hpp")
+HEADERS=("Architecture.hpp" "Dispatcher.hpp" "defs.hpp" "utils.hpp" "core.hpp")
 
 for header in "${HEADERS[@]}"; do
     echo "Downloading $header..."
