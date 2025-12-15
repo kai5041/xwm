@@ -22,13 +22,12 @@ public:
   extern "C" CLASS *entry(xwm::Dispatcher &dispatcher) {                       \
     return new CLASS(dispatcher);                                              \
   }
-
 #elif defined(_WIN32)
 #define XWM_ENTRY(CLASS)                                                       \
   extern "C" __declspec(dllexport) CLASS *entry(xwm::Dispatcher &dispatcher) { \
     return new CLASS(dispatcher);                                              \
   }
-
 #else
 #error "Unsupported platform for XWM_ENTRY"
 #endif
+

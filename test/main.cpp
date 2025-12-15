@@ -15,7 +15,6 @@ public:
       std::cout << "Argument " << i << ": " << dispatcher->get_args()[i]
                 << std::endl;
     }
-    exit(EXIT_FAILURE);
     return 0;
   }
 };
