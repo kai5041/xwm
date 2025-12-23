@@ -1,3 +1,4 @@
+#include "xwm/Memory.hpp"
 #include <iostream>
 
 #include <xwm/Dispatcher.hpp>
@@ -11,6 +12,12 @@ int main(int argc, char **argv) {
   }
 
   args.erase(args.begin());
+
+  xwm::Memory memory;
+  memory.write(0, 5);
+  memory.write(0xfff, 5);
+
+  std::cout << memory << std::endl;
 
   return xwm::Dispatcher(std::move(args)).dispatch();
 }

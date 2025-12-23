@@ -35,12 +35,14 @@ Dispatcher::Dispatcher(Vec<std::string> args) : args(std::move(args)) {
 
 u32 Dispatcher::dispatch() {
   auto it = commands.find(args[0]);
-  args.erase(args.begin());
 
   if (it == commands.end()) {
     std::cerr << "Command not found: " << args[0] << std::endl;
     return 1;
   }
+
+  args.erase(args.begin());
+
   auto &cmd = it->second;
 
   auto result = cmd.func(*this);
