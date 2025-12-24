@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
 BASE_URL="https://raw.githubusercontent.com/kai5041/xwm/master/include/xwm"
 TARGET_DIR="include/xwm"

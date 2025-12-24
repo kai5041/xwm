@@ -21,8 +21,9 @@ using i64 = std::int64_t;
 using r32 = float;
 using r64 = double;
 
-template <typename T, typename U> using Map = std::unordered_map<T, U>;
-template <typename T> using Vec = std::vector<T>;
+template <typename _T, typename U> using Map = std::unordered_map<_T, U>;
+template <typename _T> using Vec = std::vector<_T>;
+template <typename _T, std::size_t _N> using Array = std::array<_T, _N>;
 
 inline std::ostream &operator<<(std::ostream &os, u8 value) {
   return os << static_cast<unsigned int>(value);
