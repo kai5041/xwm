@@ -1,15 +1,15 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "build and run",
-			"type": "shell",
-			"command": "make -j$(nproc) && make run",
-			"problemMatcher": [],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build & Run",
+      "type": "shell",
+      "command": ".\\be.ps1",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }
